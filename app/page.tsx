@@ -1,6 +1,7 @@
 "use client";
 
 import Card from "@/components/Card";
+import { Button, Spinner } from "@radix-ui/themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -21,16 +22,17 @@ type Article = {
 export default function Page() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(1);
   const [error, setError] = useState<string>();
 
-  const fetchArticles = async () => {
+  const fetchArticles = async (page: number) => {
     try {
       setLoading(true);
-      const response = await fetch("/api");
+      const response = await fetch(`/api?page=${page}`);
       if (response) {
         setLoading(false);
         const data = await response.json();
-        setArticles(data.articles);
+        setArticles([...articles, ...data.articles]);
       }
     } catch (error) {
       setLoading(false);
@@ -39,18 +41,18 @@ export default function Page() {
   };
 
   useEffect(() => {
-    fetchArticles();
-  }, []);
+    fetchArticles(page);
+  }, [page]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (error) {
     return <div>{error.toString()}</div>;
   }
 
-  if (!articles.length) {
+  if (!loading && !articles.length) {
     return <div>Ingen artikkler funnet</div>;
   }
 
@@ -73,6 +75,21 @@ export default function Page() {
           </div>
         </Card>
       ))}
+      <div className="flex justify-center p-10 w-full">
+        {articles.length === 0 ? (
+          <Spinner size="3" />
+        ) : (
+          <Button
+            onClick={() => setPage(page + 1)}
+            variant="soft"
+            className="cursor-pointer"
+            size="4"
+          >
+            {loading && <Spinner />}
+            More articles
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
