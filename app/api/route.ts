@@ -9,11 +9,12 @@ type ResponseData = {
 
 export async function GET() {
   const data = await fetch(
-    `https://newsapi.org/v2/everything?q=apple&from=2024-08-31&to=2024-08-31&pageSize=5&sortBy=publishedAt&apiKey=${process.env.NEWSAPI_APIKEY}`
+    `https://newsapi.org/v2/everything?q=apple&domains=techcrunch.com&from=2024-08-01&to=2024-08-31&pageSize=15&sortBy=publishedAt&apiKey=${process.env.NEWSAPI_APIKEY}`
   );
   const dataJson = await data.json();
-  // console.log("data.status---", dataJson.message);
+  console.log("data.status---", dataJson);
   if (dataJson.status === "error") {
+    console.log("eeeeee--->", dataJson.message);
     throw new Error(dataJson.message);
   }
   return NextResponse.json(dataJson);

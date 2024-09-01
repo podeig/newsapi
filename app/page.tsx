@@ -1,5 +1,7 @@
 "use client";
 
+import Card from "@/components/Card";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Article = {
@@ -7,31 +9,31 @@ type Article = {
     id: number;
     name: string;
   };
-  title: string;
-  content: string;
   author: string;
-  date: Date;
-  category: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  content: string;
 };
 
 export default function Page() {
-  // let data = await fetch(
-  //   "https://newsapi.org/v2/everything?q=apple&from=2024-08-31&to=2024-08-31&pageSize=5&sortBy=publishedAt&apiKey=d212c0de8e27483991f2c8c533d8f39d"
-  // );
-  // let posts = await data.json();
-  // console.log("posts->", posts.articles);
-  // let data = await fetch("http://localhost:3000/api/");
   const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>();
 
   const fetchArticles = async () => {
     try {
+      setLoading(true);
       const response = await fetch("/api");
       if (response) {
+        setLoading(false);
         const data = await response.json();
         setArticles(data.articles);
       }
     } catch (error) {
+      setLoading(false);
       setError(error as string);
     }
   };
@@ -40,21 +42,37 @@ export default function Page() {
     fetchArticles();
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   if (error) {
     return <div>{error.toString()}</div>;
   }
 
-  if (!articles?.length) {
-    return <div>Loading...</div>;
+  if (!articles.length) {
+    return <div>Ingen artikkler funnet</div>;
   }
+
   // let posts = await data.json();
   return (
-    <ul>
+    <div className="flex gap-0 flex-row flex-wrap w-full py-4">
       {articles?.map((article: Article, key: number) => (
-        <li key={key}>
-          {key + 1}. {article.title}
-        </li>
+        <Card key={key} className="w-1/3 border-l border-gray-200 p-6">
+          <div className="flex flex-col h-full">
+            {article.urlToImage && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={article.urlToImage}
+                alt={article.title}
+                width={400}
+                className="mx-auto image-old oldImage border-[20px] border-white"
+              />
+            )}
+            <h2 className="text-xl p-2">{article.title}</h2>
+          </div>
+        </Card>
       ))}
-    </ul>
+    </div>
   );
 }
