@@ -28,11 +28,11 @@ export default function RootLayout({
             className="lg:w-[1200px] w-[90%] bg-opacity-80 flex flex-col m-auto"
             style={{ backgroundColor: "#f9f7f1" }}
           >
-            <div className="p-10 flex w-full sticky top-0 bg-white bg-opacity-95 z-50">
+            <div className="p-5 lg:p-10 flex w-full sticky top-0 bg-white bg-opacity-95 z-50">
               <Image
                 src="/images/logo-newsapi.svg"
                 alt="Logo NewsAPI"
-                width={200}
+                width={180}
                 height={100}
                 className="border-2 mx-auto rounded-lg borderRed"
               />

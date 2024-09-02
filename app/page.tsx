@@ -33,7 +33,6 @@ export default function Page() {
       if (response) {
         setLoading(false);
         const data = await response.json();
-        console.log("data.articles-->", data.articles.length);
         if (data.articles.length === 0) {
           setNoMoreArticles(true);
         }
@@ -61,11 +60,13 @@ export default function Page() {
     return <div>Ingen artikkler funnet</div>;
   }
 
-  // let posts = await data.json();
   return (
     <div className="flex gap-0 flex-row flex-wrap w-full py-4">
       {articles?.map((article: Article, key: number) => (
-        <Card key={key} className="lg:w-1/3 w-1/2 border-l border-gray-200 p-6">
+        <Card
+          key={key}
+          className="lg:w-1/3 w-full border-l border-gray-200 p-6"
+        >
           <div
             className="flex flex-col h-full"
             onClick={() => onNavigate(article.url)}
@@ -82,7 +83,7 @@ export default function Page() {
             <time className="px-2 text-sm mt-4 font-bold">
               {format(article.publishedAt, "dd.MM.yyyy HH:MM")}
             </time>
-            <h2 className="text-xl p-2 font-semibold">{article.title}</h2>
+            <h2 className="lg:text-xl p-2 font-semibold">{article.title}</h2>
           </div>
         </Card>
       ))}
