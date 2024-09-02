@@ -13,6 +13,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      scale: {
+        "102": "1.02",
+      },
       image: {
         old: {
           filter: "grayscale(1) blur(1px) contrast(1.2) sepia(1)",

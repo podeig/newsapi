@@ -68,10 +68,11 @@ export default function Page() {
           key={key}
           href={article.url}
           scroll={false}
-          className="lg:w-1/3 w-full"
+          className="lg:w-1/3 w-full relative bg-transparent top-0 hover:bg-yellow-50 hover:-top-[15px] transition-all duration-200 bg-opacity-50 hover:scale-103"
           target="_black"
+          type="button"
         >
-          <Card className="border-l border-gray-200 p-6">
+          <Card className=" border-gray-200 p-6">
             <div
               className="flex flex-col h-full"
               onClick={() => onNavigate(article.url)}
