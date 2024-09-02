@@ -1,13 +1,14 @@
 "use client";
 
 import Card from "@/components/Card";
-import { Button, Select, ChevronDownIcon, Spinner } from "@radix-ui/themes";
+import { Button, Spinner } from "@radix-ui/themes";
 import { format } from "date-fns";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Search from "@/components/Search";
 import { PAGE_SIZE } from "@/utils/config";
+import SelectDomain from "@/components/SelectDomain";
 
 export default function Page() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -92,21 +93,12 @@ export default function Page() {
             onChange={(query) => onChange(query)}
             className="mr-1"
           />
-          <Select.Root
-            value={domain}
-            onValueChange={(selectedDomain) => onChangeDomain(selectedDomain)}
-            size="3"
-          >
-            <Select.Trigger />
-            <Select.Content>
-              <Select.Group>
-                <Select.Label>Web sites</Select.Label>
-                <Select.Item value="techcrunch.com">techcrunch.com</Select.Item>
-                <Select.Item value="nbcnews.com">nbcnews.com</Select.Item>
-                <Select.Item value="bbc.co.uk">bbc.co.uk</Select.Item>
-              </Select.Group>
-            </Select.Content>
-          </Select.Root>
+          <SelectDomain
+            domain={domain}
+            onChange={(selectedDomain: string) =>
+              onChangeDomain(selectedDomain)
+            }
+          />
         </div>
       </div>
       <div className="flex gap-0 flex-row flex-wrap w-full py-4">
@@ -119,7 +111,7 @@ export default function Page() {
             target="_black"
             type="button"
           >
-            <Card className=" border-gray-200 p-6">
+            <Card className="border-gray-200 p-6">
               <div
                 className="flex flex-col h-full"
                 onClick={() => onNavigate(article.url)}
@@ -143,8 +135,10 @@ export default function Page() {
           </Link>
         ))}
         <div className="flex justify-center p-10 w-full">
-          {!loading && !articles.length && <div>🤷‍♂️ No articles found</div>}
           {loading && <Spinner size="3" />}
+
+          {!loading && !articles.length && <div>🤷‍♂️ No articles found</div>}
+
           {!loading && !noMoreArticles && (
             <Button
               onClick={() => setPage(page + 1)}
@@ -152,7 +146,6 @@ export default function Page() {
               size="4"
               style={{ cursor: "pointer" }}
             >
-              {loading && <Spinner />}
               More articles
             </Button>
           )}

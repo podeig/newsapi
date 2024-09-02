@@ -28,9 +28,6 @@ export default function RootLayout({
             style={{ backgroundColor: "#f9f7f1" }}
           >
             <div className="flex w-full flex-col">{children}</div>
-            <div className="flex h-[100px] bg-white items-center justify-center bg-opacity-60">
-              Developed by Denis Pokotylyuk
-            </div>
           </div>
         </Theme>
       </body>
