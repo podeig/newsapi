@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
@@ -28,15 +27,6 @@ export default function RootLayout({
             className="bg-opacity-50 flex flex-col m-auto"
             style={{ backgroundColor: "#f9f7f1" }}
           >
-            <div className="p-5 lg:p-10 flex w-full sticky top-0 bg-white bg-opacity-95 z-50">
-              <Image
-                src="/images/logo-newsapi.svg"
-                alt="Logo NewsAPI"
-                width={180}
-                height={100}
-                className="border-2 mx-auto rounded-lg"
-              />
-            </div>
             <div className="flex w-full flex-col">{children}</div>
             <div className="flex h-[100px] bg-white items-center justify-center bg-opacity-60">
               Developed by Denis Pokotylyuk
