@@ -23,9 +23,9 @@ export default function RootLayout({
         className={`${inter.className} m-auto flex justify-center bg-fixed bg-cover`}
         style={{ backgroundImage: "url(/images/bg-newspaper.jpg)" }}
       >
-        <Theme className="w-full lg:w-[1024px]">
+        <Theme className="w-full lg:w-[1024px] bg-opacity-0">
           <div
-            className="bg-opacity-80 flex flex-col m-auto"
+            className="bg-opacity-50 flex flex-col m-auto"
             style={{ backgroundColor: "#f9f7f1" }}
           >
             <div className="p-5 lg:p-10 flex w-full sticky top-0 bg-white bg-opacity-95 z-50">

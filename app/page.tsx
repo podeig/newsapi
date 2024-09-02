@@ -65,12 +65,13 @@ export default function Page() {
     <div className="flex gap-0 flex-row flex-wrap w-full py-4">
       {articles?.map((article: Article, key: number) => (
         <Link
+          key={key}
           href={article.url}
           scroll={false}
           className="lg:w-1/3 w-full"
           target="_black"
         >
-          <Card key={key} className="border-l border-gray-200 p-6">
+          <Card className="border-l border-gray-200 p-6">
             <div
               className="flex flex-col h-full"
               onClick={() => onNavigate(article.url)}
