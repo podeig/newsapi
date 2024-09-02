@@ -95,6 +95,7 @@ export default function Page() {
           <Select.Root
             value={domain}
             onValueChange={(selectedDomain) => onChangeDomain(selectedDomain)}
+            size="3"
           >
             <Select.Trigger />
             <Select.Content>
@@ -142,7 +143,7 @@ export default function Page() {
           </Link>
         ))}
         <div className="flex justify-center p-10 w-full">
-          {!loading && !articles.length && <div>Ingen artikkler funnet</div>}
+          {!loading && !articles.length && <div>🤷‍♂️ No articles found</div>}
           {loading && <Spinner size="3" />}
           {!loading && !noMoreArticles && (
             <Button

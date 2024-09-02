@@ -16,9 +16,10 @@ export default function Search({ query, onChange, className }: Props) {
     <TextField.Root
       placeholder="Search articles..."
       autoFocus
-      className={`w-[250px] ${className}`}
+      className={`lg:w-[300px] w-[200px] ${className}`}
       onChange={(e) => onChange(e.target.value)}
       value={query}
+      size="3"
     >
       <TextField.Slot>
         <MagnifyingGlassIcon height="16" width="16" />
