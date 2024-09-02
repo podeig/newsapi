@@ -23,9 +23,9 @@ export default function RootLayout({
         className={`${inter.className} m-auto flex justify-center bg-fixed bg-cover`}
         style={{ backgroundImage: "url(/images/bg-newspaper.jpg)" }}
       >
-        <Theme>
+        <Theme className="w-full lg:w-[1024px]">
           <div
-            className="lg:w-[1200px] w-[90%] bg-opacity-80 flex flex-col m-auto"
+            className="bg-opacity-80 flex flex-col m-auto"
             style={{ backgroundColor: "#f9f7f1" }}
           >
             <div className="p-5 lg:p-10 flex w-full sticky top-0 bg-white bg-opacity-95 z-50">
@@ -34,7 +34,7 @@ export default function RootLayout({
                 alt="Logo NewsAPI"
                 width={180}
                 height={100}
-                className="border-2 mx-auto rounded-lg borderRed"
+                className="border-2 mx-auto rounded-lg"
               />
             </div>
             <div className="flex w-full flex-col">{children}</div>

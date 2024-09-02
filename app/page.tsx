@@ -3,6 +3,7 @@
 import Card from "@/components/Card";
 import { Button, Spinner } from "@radix-ui/themes";
 import { format } from "date-fns";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type Article = {
@@ -63,29 +64,32 @@ export default function Page() {
   return (
     <div className="flex gap-0 flex-row flex-wrap w-full py-4">
       {articles?.map((article: Article, key: number) => (
-        <Card
-          key={key}
-          className="lg:w-1/3 w-full border-l border-gray-200 p-6"
+        <Link
+          href={article.url}
+          scroll={false}
+          className="lg:w-1/3 w-full"
+          target="_black"
         >
-          <div
-            className="flex flex-col h-full"
-            onClick={() => onNavigate(article.url)}
-          >
-            {article.urlToImage && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={article.urlToImage}
-                alt={article.title}
-                width={400}
-                className="mx-auto image-old oldImage border-[20px] border-white"
-              />
-            )}
-            <time className="px-2 text-sm mt-4 font-bold">
-              {format(article.publishedAt, "dd.MM.yyyy HH:MM")}
-            </time>
-            <h2 className="lg:text-xl p-2 font-semibold">{article.title}</h2>
-          </div>
-        </Card>
+          <Card key={key} className="border-l border-gray-200 p-6">
+            <div
+              className="flex flex-col h-full"
+              onClick={() => onNavigate(article.url)}
+            >
+              {article.urlToImage && (
+                <img
+                  src={article.urlToImage}
+                  alt={article.title}
+                  width={400}
+                  className="mx-auto image-old oldImage border-[20px] border-white"
+                />
+              )}
+              <time className="px-2 text-sm mt-4 font-bold">
+                {format(article.publishedAt, "dd.MM.yyyy HH:MM")}
+              </time>
+              <h2 className="lg:text-xl p-2 font-semibold">{article.title}</h2>
+            </div>
+          </Card>
+        </Link>
       ))}
       <div className="flex justify-center p-10 w-full">
         {articles.length === 0 ? (

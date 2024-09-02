@@ -36,3 +36,7 @@ body {
   filter: grayscale(1) blur(1px) contrast(1.2) sepia(1) blur(0.25px);
   -webkit-mask: radial-gradient(#000, #0009);
 }
+
+.borderred {
+  border: solid 4px red;
+}
