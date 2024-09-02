@@ -25,7 +25,7 @@ export default function RootLayout({
       >
         <Theme>
           <div
-            className="w-[1200px] bg-opacity-80 flex flex-col"
+            className="lg:w-[1200px] w-[90%] bg-opacity-80 flex flex-col m-auto"
             style={{ backgroundColor: "#f9f7f1" }}
           >
             <div className="p-10 flex w-full sticky top-0 bg-white bg-opacity-95 z-50">

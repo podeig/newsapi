@@ -2,7 +2,7 @@
 
 import Card from "@/components/Card";
 import { Button, Spinner } from "@radix-ui/themes";
-import Image from "next/image";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
 type Article = {
@@ -23,6 +23,7 @@ export default function Page() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
+  const [noMoreArticles, setNoMoreArticles] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
   const fetchArticles = async (page: number) => {
@@ -32,6 +33,10 @@ export default function Page() {
       if (response) {
         setLoading(false);
         const data = await response.json();
+        console.log("data.articles-->", data.articles.length);
+        if (data.articles.length === 0) {
+          setNoMoreArticles(true);
+        }
         setArticles([...articles, ...data.articles]);
       }
     } catch (error) {
@@ -44,9 +49,9 @@ export default function Page() {
     fetchArticles(page);
   }, [page]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  const onNavigate = (url: string) => {
+    console.log("URL:", url);
+  };
 
   if (error) {
     return <div>{error.toString()}</div>;
@@ -60,8 +65,11 @@ export default function Page() {
   return (
     <div className="flex gap-0 flex-row flex-wrap w-full py-4">
       {articles?.map((article: Article, key: number) => (
-        <Card key={key} className="w-1/3 border-l border-gray-200 p-6">
-          <div className="flex flex-col h-full">
+        <Card key={key} className="lg:w-1/3 w-1/2 border-l border-gray-200 p-6">
+          <div
+            className="flex flex-col h-full"
+            onClick={() => onNavigate(article.url)}
+          >
             {article.urlToImage && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -71,19 +79,24 @@ export default function Page() {
                 className="mx-auto image-old oldImage border-[20px] border-white"
               />
             )}
-            <h2 className="text-xl p-2">{article.title}</h2>
+            <time className="px-2 text-sm mt-4 font-bold">
+              {format(article.publishedAt, "dd.MM.yyyy HH:MM")}
+            </time>
+            <h2 className="text-xl p-2 font-semibold">{article.title}</h2>
           </div>
         </Card>
       ))}
       <div className="flex justify-center p-10 w-full">
         {articles.length === 0 ? (
           <Spinner size="3" />
+        ) : noMoreArticles ? (
+          <div className="font-bold">No more articles to load</div>
         ) : (
           <Button
             onClick={() => setPage(page + 1)}
             variant="soft"
-            className="cursor-pointer"
             size="4"
+            style={{ cursor: "pointer" }}
           >
             {loading && <Spinner />}
             More articles
