@@ -23,10 +23,7 @@ export default function RootLayout({
         style={{ backgroundImage: "url(/images/bg-newspaper.jpg)" }}
       >
         <Theme className="w-full lg:w-[1024px] bg-opacity-0">
-          <div
-            className="bg-opacity-50 flex flex-col m-auto"
-            style={{ backgroundColor: "#f9f7f1" }}
-          >
+          <div className="flex flex-col m-auto bg-main">
             <div className="flex w-full flex-col">{children}</div>
           </div>
         </Theme>

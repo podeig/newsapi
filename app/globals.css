@@ -40,3 +40,7 @@ body {
 .borderred {
   border: solid 4px red;
 }
+
+.bg-main {
+  background-color: #f9f7f1;
+}
