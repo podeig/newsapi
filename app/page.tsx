@@ -1,6 +1,6 @@
 "use client";
 
-import Card from "@/components/Card";
+import Article from "@/components/Article";
 import { Button, Spinner } from "@radix-ui/themes";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -89,7 +89,7 @@ export default function Page() {
       </div>
       <div className="flex gap-0 flex-row flex-wrap w-full py-4">
         {articles?.map((article: Article) => (
-          <Card
+          <Article
             article={article}
             key={article.url}
             className="border-gray-200 p-6"

@@ -1,3 +1,4 @@
+import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import Link from "next/link";
 
@@ -6,7 +7,7 @@ type Props = {
   className: string;
 };
 
-export default function Card({ article, className }: Props) {
+export default function Article({ article, className }: Props) {
   return (
     <Link
       href={article.url}
@@ -28,7 +29,14 @@ export default function Card({ article, className }: Props) {
           <time className="px-2 text-sm mt-4 font-bold">
             {format(article.publishedAt, "dd.MM.yyyy HH:MM")}
           </time>
-          <h2 className="lg:text-xl p-2 font-semibold">{article.title}</h2>
+          <h2 className="lg:text-xl p-2 font-semibold">
+            {article.title}
+            <ExternalLinkIcon
+              height="18"
+              width="18"
+              className="inline-block ml-2"
+            />
+          </h2>
         </div>
       </div>
     </Link>
